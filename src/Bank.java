@@ -3,7 +3,7 @@ import Usuarios.User;
 
 import java.util.ArrayList;
 
-public class Banco {
+public class Bank {
     private final String name = "BankApp";
     private ArrayList<Cuenta> accounts = new ArrayList<Cuenta>();
     private ArrayList<User> users = new ArrayList<User>();
