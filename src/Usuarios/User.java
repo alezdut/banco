@@ -4,26 +4,16 @@ import Cuentas.Cuenta;
 
 import java.util.ArrayList;
 
-public class User {
+public abstract class User {
     private String name;
     private String lastName;
     private String userName;
     private String password;
-    private int document;
-    private ArrayList<Cuenta> accounts = new ArrayList<Cuenta>();
     public void User(String name, String lastName, String userName, String password, int document){
         this.name = name;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
-        this.document = document;
-    }
-    public ArrayList<Cuenta> getAccounts() {
-        return accounts;
-    }
-
-    public void setAccounts(ArrayList<Cuenta> accounts) {
-        this.accounts = accounts;
     }
 
     public String getName() {
@@ -56,13 +46,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getDocument() {
-        return document;
-    }
-
-    public void setDocument(int document) {
-        this.document = document;
     }
 }
