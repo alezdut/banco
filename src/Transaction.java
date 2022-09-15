@@ -1,4 +1,4 @@
-import Cuentas.Cuenta;
+import Cuentas.Account;
 
 import java.util.Date;
 
@@ -6,8 +6,8 @@ public class Transaction {
     private String code;
     private Date date;
     private float amount;
-    private Cuenta origin;
-    private Cuenta destiny;
+    private Account origin;
+    private Account destiny;
 
     public String getCode() {
         return code;
@@ -33,19 +33,19 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public Cuenta getOrigin() {
+    public Account getOrigin() {
         return origin;
     }
 
-    public void setOrigin(Cuenta origin) {
+    public void setOrigin(Account origin) {
         this.origin = origin;
     }
 
-    public Cuenta getDestiny() {
+    public Account getDestiny() {
         return destiny;
     }
 
-    public void setDestiny(Cuenta destiny) {
+    public void setDestiny(Account destiny) {
         this.destiny = destiny;
     }
 }

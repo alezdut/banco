@@ -1,14 +1,14 @@
 package Usuarios;
 
-import Cuentas.Cuenta;
+import Cuentas.Account;
 
 import java.util.ArrayList;
 
 public class Client extends User{
     private int document;
-    private ArrayList<Cuenta> accounts = new ArrayList<Cuenta>();
+    private ArrayList<Account> accounts = new ArrayList<Account>();
 
-    public Client(String name, String lastName, String userName, String passWord, int document, ArrayList<Cuenta> accounts){
+    public Client(String name, String lastName, String userName, String passWord, int document, ArrayList<Account> accounts){
         super(name, lastName, userName, passWord);
         this.document = document;
         this.accounts = accounts;
@@ -22,11 +22,11 @@ public class Client extends User{
         this.document = document;
     }
 
-    public ArrayList<Cuenta> getAccounts() {
+    public ArrayList<Account> getAccounts() {
         return accounts;
     }
 
-    public void setAccounts(ArrayList<Cuenta> accounts) {
+    public void setAccounts(ArrayList<Account> accounts) {
         this.accounts = accounts;
     }
 }
