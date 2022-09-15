@@ -23,4 +23,6 @@ public abstract class Cuenta {
     public String getDivisa() {return divisa;}
 
     public void setDivisa(String divisa) {this.divisa = divisa;}
+
+    public abstract float mostrarSaldoDisponible();
 }
