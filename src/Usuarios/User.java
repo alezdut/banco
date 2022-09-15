@@ -1,6 +1,6 @@
 package Usuarios;
 
-import Cuentas.Cuenta;
+import Cuentas.Account;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ public class User {
     private String userName;
     private String password;
     private int document;
-    private ArrayList<Cuenta> accounts = new ArrayList<Cuenta>();
+    private ArrayList<Account> accounts = new ArrayList<Account>();
     public void User(String name, String lastName, String userName, String password, int document){
         this.name = name;
         this.lastName = lastName;
@@ -18,11 +18,11 @@ public class User {
         this.password = password;
         this.document = document;
     }
-    public ArrayList<Cuenta> getAccounts() {
+    public ArrayList<Account> getAccounts() {
         return accounts;
     }
 
-    public void setAccounts(ArrayList<Cuenta> accounts) {
+    public void setAccounts(ArrayList<Account> accounts) {
         this.accounts = accounts;
     }
 

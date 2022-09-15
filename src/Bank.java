@@ -1,22 +1,22 @@
-import Cuentas.Cuenta;
+import Cuentas.Account;
 import Usuarios.User;
 
 import java.util.ArrayList;
 
 public class Bank {
     private final String name = "BankApp";
-    private ArrayList<Cuenta> accounts = new ArrayList<Cuenta>();
+    private ArrayList<Account> accounts = new ArrayList<Account>();
     private ArrayList<User> users = new ArrayList<User>();
 
     public String getName() {
         return name;
     }
 
-    public ArrayList<Cuenta> getAccounts() {
+    public ArrayList<Account> getAccounts() {
         return accounts;
     }
 
-    public void setAccounts(ArrayList<Cuenta> accounts) {
+    public void setAccounts(ArrayList<Account> accounts) {
         this.accounts = accounts;
     }
 
