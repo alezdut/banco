@@ -1,8 +1,10 @@
 package Cuentas;
 
+import Usuarios.User;
+
 public abstract class Cuenta {
     private int numCuenta;
-    //private Usuario titular;
+    private User titular;
     float saldo;
     String divisa;      //o enum
 

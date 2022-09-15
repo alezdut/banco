@@ -11,21 +11,19 @@ public class User {
     private String password;
     private int document;
     private ArrayList<Cuenta> accounts = new ArrayList<Cuenta>();
-
+    public void User(String name, String lastName, String userName, String password, int document){
+        this.name = name;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.password = password;
+        this.document = document;
+    }
     public ArrayList<Cuenta> getAccounts() {
         return accounts;
     }
 
     public void setAccounts(ArrayList<Cuenta> accounts) {
         this.accounts = accounts;
-    }
-
-    public void Usuario(String name, String lastName, String userName, String password, int document){
-        this.name = name;
-        this.lastName = lastName;
-        this.userName = userName;
-        this.password = password;
-        this.document = document;
     }
 
     public String getName() {
