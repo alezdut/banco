@@ -1,5 +1,6 @@
 
 import Menus.Create;
+import Menus.LogIn;
 import Usuarios.Client;
 import Usuarios.User;
 
@@ -11,6 +12,7 @@ import java.util.Set;
 public class Main {
     public static void main(String[] args){
         Set<String> unSet = new HashSet<String>();
+        Set<User> usersSet = new HashSet<User>();
         Scanner sn = new Scanner(System.in);
         boolean exit = false;
         boolean logged = false;
@@ -34,6 +36,7 @@ public class Main {
                         System.out.println("Has seleccionado la opcion 2");
                         break;
                     case 3:
+                        loggedUser = null;
                         logged = false;
                         break;
                     default:
@@ -50,11 +53,15 @@ public class Main {
 
                     switch (option) {
                         case 1:
-                            System.out.println("Has seleccionado la opcion 1");
+                            loggedUser = new LogIn().logIn(usersSet);
+                            if(loggedUser != null){
+                                logged = true;
+                            }
                             break;
                         case 2:
                             loggedUser = new Create().createAccount(unSet);
                             if(loggedUser != null){
+                                usersSet.add(loggedUser);
                                 logged = true;
                             }
                             break;
