@@ -10,11 +10,9 @@ public abstract class User {
     private String userName;
     private String password;
     private ArrayList<Account> accounts = new ArrayList<Account>();
-    public User(String name, String lastName, String userName, String password){
+    public User(String name, String lastName){
         this.name = name;
         this.lastName = lastName;
-        this.userName = userName;
-        this.password = password;
     }
     public ArrayList<Account> getAccounts() {
         return accounts;
@@ -24,12 +22,11 @@ public abstract class User {
         this.accounts = accounts;
     }
 
+    public void setName(String name){
+        this.name = name;
+    }
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getLastName() {

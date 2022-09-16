@@ -8,10 +8,9 @@ public class Client extends User{
     private int document;
     private ArrayList<Account> accounts = new ArrayList<Account>();
 
-    public Client(String name, String lastName, String userName, String passWord, int document, ArrayList<Account> accounts){
-        super(name, lastName, userName, passWord);
+    public Client(String name, String lastName, int document){
+        super(name, lastName);
         this.document = document;
-        this.accounts = accounts;
     }
 
     public int getDocument() {
