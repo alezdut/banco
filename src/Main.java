@@ -21,6 +21,7 @@ public class Main {
 
         while (!exit) {
             if(logged){
+                try{
                 System.out.println("Bienvenido!");
                 System.out.println("Seleccione una de las opciones:");
                 System.out.println("1. Revisar saldo");
@@ -42,6 +43,10 @@ public class Main {
                     default:
                         System.out.println("Solo números entre 1 y 3");
                 }
+            } catch (InputMismatchException e) {
+                System.out.println("Debes insertar un número");
+                sn.next();
+            }
             }
             else{
                 try {
@@ -53,7 +58,7 @@ public class Main {
 
                     switch (option) {
                         case 1:
-                            loggedUser = new LogIn().logIn(usersSet);
+                            loggedUser =  LogIn.logIn(usersSet);
                             if(loggedUser != null){
                                 logged = true;
                             }
