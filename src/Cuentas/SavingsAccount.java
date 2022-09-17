@@ -10,6 +10,6 @@ public class SavingsAccount extends Account {
 
     @Override
     public float showAvailableBalance(){
-        return balance;
+        return this.getBalance();
     }
 }

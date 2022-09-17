@@ -3,11 +3,11 @@ package Cuentas;
 import Usuarios.User;
 
 public abstract class Account {
-    //Class member declaration
+    //Class attributes declaration
     private int accountID;
     private User accHolder;
-    float balance;
-    String currency;
+    private float balance;
+    private String currency;
 
     //Constructor
     public Account(int accountID, User accHolder, float balance, String currency) {
