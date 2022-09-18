@@ -15,6 +15,7 @@ public abstract class Account {
         this.accHolder = accHolder;
         this.balance = balance;
         this.currency = currency;
+        /**/ //Add .txt files every time an account is created
     }
 
     //Getters and Setters
@@ -34,5 +35,5 @@ public abstract class Account {
 
     public void setCurrency(String currency) {this.currency = currency;}
 
-    public abstract float showAvailableBalance();
+    public abstract void showAvailableBalance();
 }

@@ -9,7 +9,7 @@ public class SavingsAccount extends Account {
     }
 
     @Override
-    public float showAvailableBalance(){
-        return this.getBalance();
+    public void showAvailableBalance(){
+        System.out.println("Usted tiene $" + this.getBalance() + " saldo disponible en su caja de ahorro.");
     }
 }

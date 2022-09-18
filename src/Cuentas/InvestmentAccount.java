@@ -15,9 +15,10 @@ public class InvestmentAccount extends Account {
     }
 
     @Override
-    //Cambiar para mostrar los plazos fijos y el balance real disponible para transacciones
-    public float showAvailableBalance(){
-        return this.getBalance();
+    public void showAvailableBalance(){
+        System.out.println("Usted tiene $" + this.getBalance() + " saldo disponible en su cuenta de inversiones."
+                            + "\ny ");
+        this.getFixedTerms();
     }
 
     public void fixedTermMenu(){
@@ -30,18 +31,19 @@ public class InvestmentAccount extends Account {
         System.out.println("-> Presione 1 para iniciar un nuevo plazo fijo");
         System.out.println("-> Presione 2 para consultar sus plazos fijos");
         System.out.println("-> Presione 3 para salir");
-        //Emptying the buffer
-        keyboard.nextLine();
 
         try {
             option = keyboard.nextByte(); keyboard.nextLine();
             switch (option) {
                 case 1 -> newFixedTerm(keyboard);
                 case 2 -> getFixedTerms();
-                case 3 -> {break;}
+                case 3 -> {return;}
                 default -> throw new InputMismatchException();
             }
-        } catch (InputMismatchException e){ System.out.println("El valor ingresado no es una opcion disponible"); }
+        } catch (InputMismatchException e){
+            System.out.println("El valor ingresado no es una opcion disponible");
+            return;
+        }
         } while (option != 3);
 }
 
@@ -58,6 +60,10 @@ public class InvestmentAccount extends Account {
                 System.out.println("Capital a invertir: ");
                 fixedTermAmount = keyboard.nextFloat(); keyboard.nextLine();
                 //Add new insufficientBalance exception
+                if(fixedTermAmount > this.getBalance()){
+                    System.out.println("El balance de su cuenta de inversiones es insuficiente\n");
+                    break;
+                }
 
                 //MonthDuration should be a number between 1-12
                 System.out.println("Meses de duracion del plazo: ");
@@ -101,7 +107,7 @@ public class InvestmentAccount extends Account {
                 System.out.println(ft);
             }
         }
-        else System.out.println("Usted no tienen ningun plazo fijo activo asociado a su cuenta\n");
+        else System.out.println("Usted no tiene ningun plazo fijo activo asociado a su cuenta\n");
         System.out.println("Presione una tecla para continuar: ");
         keyboard.nextLine();
     }
