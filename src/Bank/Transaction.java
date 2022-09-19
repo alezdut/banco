@@ -64,9 +64,11 @@ public class Transaction {
                     "\nAmount: " + this.getAmount() +
                     "\nCurrency: " + this.getOrigin().getCurrency() +
                     "\nFrom account: " +
+                    "\n\tAccount owner: " + this.getOrigin().getAccHolder().getName() +
                     "\n\tAccount ID: " + this.getOrigin().getAccountID() +
                     "\n\tAccount type: " + this.getOrigin().getAccountType() +
-                    "To account: " +
+                    "\nTo account: " +
+                    "\n\tAccount owner: " + this.getDestiny().getAccHolder().getName() +
                     "\n\tAccount ID: " + this.getDestiny().getAccountID() +
                     "\n\tAccount type: " + this.getDestiny().getAccountType();
         return s;

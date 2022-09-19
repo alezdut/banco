@@ -25,7 +25,7 @@ public class Main {
                 System.out.println("1. Revisar saldo");
                 System.out.println("2. Crear Cuenta de inversion o ahorro");
                 System.out.println("3. Hacer Transferencia");
-                System.out.println("4. Revisar historial de transacciones");
+                System.out.println("4. Revisar historial de movimientos");
                 System.out.println("5. Cerrar Sesion");
                 option = sn.nextInt();
 
@@ -58,7 +58,7 @@ public class Main {
                         break;
                     case 4:
                         ArrayList<Transaction> transactions = Get.getTransactionsByUser(loggedUser);
-                        transactions.forEach(transaction -> {System.out.println(transaction);});
+                        transactions.forEach(transaction -> {System.out.println(transaction + "\n");});
                     case 5:
                         loggedUser = null;
                         break;

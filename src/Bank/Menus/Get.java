@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Get {
@@ -98,14 +99,15 @@ public class Get {
             connect.connect();
             transactions = new ArrayList<Transaction>();
 
-            //This line need to return all the transactions of the user and then everything should work
-            ResultSet accountsDb = connect.get("SELECT `transaction`.`transaction_id`, `transaction`.`date`, `transaction`.`amount`, `transaction`.`origin_account_id`, `transaction`.`destiny_account_id`, `user`.`user_name` FROM `BANK`.`transaction` JOIN `BANK`.`account` WHERE `transaction`.`origin_account_id` = `account`.`account_id` AND `user`.`user_name` = '" + user.getUserName() + "';");
-
-
-            while (accountsDb.next()) {
-                Transaction tc = new Transaction(Integer.parseInt(accountsDb.getString("transaction_id")), accountsDb.getString("date"), Float.parseFloat(accountsDb.getString("amount")), Get.getAccountById(Integer.parseInt(accountsDb.getString("origin_account_id"))), Get.getAccountById(Integer.parseInt(accountsDb.getString("destiny_account_id"))));
-                transactions.add(tc);
-
+            ArrayList<Account> accounts =  Get.getAccountsByUser(user);
+            Iterator<Account> accountsCopy = accounts.iterator();
+            while (accountsCopy.hasNext()){
+                Account account = accountsCopy.next();
+                ResultSet accountsDb = connect.get("SELECT `transaction`.`transaction_id`, `transaction`.`date`, `transaction`.`amount`, `transaction`.`origin_account_id`, `transaction`.`destiny_account_id` FROM `BANK`.`transaction` JOIN `BANK`.`account` WHERE `transaction`.`origin_account_id` = `account`.`account_id` OR `transaction`.`destiny_account_id` = `account`.`account_id` = '" + account.getAccountID() + "';");
+                while (accountsDb.next()) {
+                    Transaction tc = new Transaction(Integer.parseInt(accountsDb.getString("transaction_id")), accountsDb.getString("date"), Float.parseFloat(accountsDb.getString("amount")), Get.getAccountById(Integer.parseInt(accountsDb.getString("origin_account_id"))), Get.getAccountById(Integer.parseInt(accountsDb.getString("destiny_account_id"))));
+                    transactions.add(tc);
+                }
             }
         } catch (SQLException e) {
             System.out.println("Ocurrio un error al consultar la informacion");
