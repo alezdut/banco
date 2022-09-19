@@ -1,16 +1,17 @@
-package Menus;
+package Bank.Menus;
 
-import Cuentas.Account;
-import Cuentas.FixedTerm;
-import Cuentas.InvestmentAccount;
-import Cuentas.SavingsAccount;
-import DbConnect.DbConnect;
-import Usuarios.Client;
-import Usuarios.User;
+import Bank.Cuentas.Account;
+import Bank.Cuentas.InvestmentAccount;
+import Bank.Cuentas.SavingsAccount;
+import Bank.DbConnect.DbConnect;
+import Bank.Usuarios.Client;
+import Bank.Usuarios.User;
+import Bank.Transaction;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Get {
@@ -88,5 +89,27 @@ public class Get {
             System.out.println("Ocurrio un error al consultar la informacion");
         }
         return account;
+    }
+
+    public static ArrayList<Transaction> getTransactionsByUser(User user){
+        ArrayList<Transaction> transactions = null;
+        try {
+            DbConnect connect = new DbConnect();
+            connect.connect();
+            transactions = new ArrayList<Transaction>();
+
+            //This line need to return all the transactions of the user and then everything should work
+            ResultSet accountsDb = connect.get("SELECT `transaction`.`transaction_id`, `transaction`.`date`, `transaction`.`amount`, `transaction`.`origin_account_id`, `transaction`.`destiny_account_id`, `user`.`user_name` FROM `BANK`.`transaction` JOIN `BANK`.`account` WHERE `transaction`.`origin_account_id` = `account`.`account_id` AND `user`.`user_name` = '" + user.getUserName() + "';");
+
+
+            while (accountsDb.next()) {
+                Transaction tc = new Transaction(Integer.parseInt(accountsDb.getString("transaction_id")), accountsDb.getString("date"), Float.parseFloat(accountsDb.getString("amount")), Get.getAccountById(Integer.parseInt(accountsDb.getString("origin_account_id"))), Get.getAccountById(Integer.parseInt(accountsDb.getString("destiny_account_id"))));
+                transactions.add(tc);
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Ocurrio un error al consultar la informacion");
+        }
+        return transactions;
     }
 }

@@ -1,13 +1,13 @@
-package Cuentas;
+package Bank.Cuentas;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import Usuarios.User;
+import Bank.Usuarios.User;
 import java.util.InputMismatchException;
 
-public class InvestmentAccount extends Account {
+public class InvestmentAccount extends Bank.Cuentas.Account {
     //Class attributes declaration
-    private ArrayList<FixedTerm> activeFixedTerms = new ArrayList<>();
+    private ArrayList<Bank.Cuentas.FixedTerm> activeFixedTerms = new ArrayList<>();
 
     //Constructor
     public InvestmentAccount(int accountID, User accHolder, float balance, String currency) {
@@ -72,14 +72,14 @@ public class InvestmentAccount extends Account {
 
                 //Calculate interest
                 System.out.println("El interes generado luego de " + fixedTermMonthDuration + " sera de: $" +
-                        FixedTerm.calculateInterest(fixedTermAmount, fixedTermMonthDuration));
+                        Bank.Cuentas.FixedTerm.calculateInterest(fixedTermAmount, fixedTermMonthDuration));
 
                 System.out.println("¿Desea efectivamente crear el plazo fijo? 1 = SI | 2 = NO\n");
                 option = keyboard.nextByte(); keyboard.nextLine();
 
                 //Creating a new FixedTerm and adding it to the users account
                 if (option == 1) {
-                    FixedTerm ft = new FixedTerm(fixedTermAmount, fixedTermMonthDuration);
+                    Bank.Cuentas.FixedTerm ft = new Bank.Cuentas.FixedTerm(fixedTermAmount, fixedTermMonthDuration);
                     this.activeFixedTerms.add(ft);
                     System.out.println("Plazo fijo creado con exito!");
                     System.out.println("Presione cualquier tecla para continuar: ");
@@ -103,7 +103,7 @@ public class InvestmentAccount extends Account {
         Scanner keyboard = new Scanner(System.in);
         if(!activeFixedTerms.isEmpty()) {
             System.out.println("Usted tiene" + activeFixedTerms.size() + " plazos fijos activos: ");
-            for (FixedTerm ft : activeFixedTerms) {
+            for (Bank.Cuentas.FixedTerm ft : activeFixedTerms) {
                 System.out.println(ft);
             }
         }
@@ -112,4 +112,8 @@ public class InvestmentAccount extends Account {
         keyboard.nextLine();
     }
 
+    @Override
+    public String getAccountType(){
+        return "Cuenta de inversiones";
+    }
 }

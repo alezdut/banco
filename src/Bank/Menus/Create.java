@@ -1,9 +1,11 @@
-package Menus;
+package Bank.Menus;
 
-import Cuentas.Account;
-import DbConnect.DbConnect;
-import Usuarios.Client;
-import Usuarios.User;
+import Bank.Cuentas.Account;
+import Bank.DbConnect.DbConnect;
+import Bank.Menus.Get;
+import Bank.Menus.Update;
+import Bank.Usuarios.Client;
+import Bank.Usuarios.User;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -117,7 +119,7 @@ public class Create {
         int origin;
         int destiny;
         AtomicInteger cont = new AtomicInteger(1);
-        ArrayList<Account> accounts = Get.getAccountsByUser(loggedUser);
+        ArrayList<Account> accounts = Bank.Menus.Get.getAccountsByUser(loggedUser);
         System.out.println("\t***Nueva Transferencia***\n");
         System.out.println("Seleccione la cuenta de origen: ");
         accounts.forEach(e -> {
@@ -129,8 +131,8 @@ public class Create {
         System.out.println("Ingrese el numero de cuenta destino: ");
 
         destiny = input.nextInt();
-        Account destinyAccount = Get.getAccountById(destiny);
-        Account originAccount = Get.getAccountById(origin);
+        Account destinyAccount = Bank.Menus.Get.getAccountById(destiny);
+        Account originAccount = Bank.Menus.Get.getAccountById(origin);
         if(destinyAccount != null){
             System.out.println("------------------------");
             System.out.println("Cuenta destino seleccionada: ");

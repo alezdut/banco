@@ -1,8 +1,9 @@
+package Bank;
 
-import Cuentas.Account;
-import Menus.Create;
-import Menus.Get;
-import Usuarios.User;
+import Bank.Cuentas.Account;
+import Bank.Menus.Create;
+import Bank.Menus.Get;
+import Bank.Usuarios.User;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -24,7 +25,8 @@ public class Main {
                 System.out.println("1. Revisar saldo");
                 System.out.println("2. Crear Cuenta de inversion o ahorro");
                 System.out.println("3. Hacer Transferencia");
-                System.out.println("4. Cerrar Sesion");
+                System.out.println("4. Revisar historial de transacciones");
+                System.out.println("5. Cerrar Sesion");
                 option = sn.nextInt();
 
                 switch (option) {
@@ -55,6 +57,9 @@ public class Main {
                         Create.createTransaction(loggedUser);
                         break;
                     case 4:
+                        ArrayList<Transaction> transactions = Get.getTransactionsByUser(loggedUser);
+                        transactions.forEach(transaction -> {System.out.println(transaction);});
+                    case 5:
                         loggedUser = null;
                         break;
                     default:

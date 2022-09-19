@@ -1,5 +1,7 @@
-import Cuentas.Account;
-import Usuarios.User;
+package Bank;
+
+import Bank.Cuentas.Account;
+import Bank.Usuarios.User;
 
 import java.util.ArrayList;
 

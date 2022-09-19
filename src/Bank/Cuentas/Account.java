@@ -1,6 +1,6 @@
-package Cuentas;
+package Bank.Cuentas;
 
-import Usuarios.User;
+import Bank.Usuarios.User;
 
 public abstract class Account {
     //Class attributes declaration
@@ -15,7 +15,6 @@ public abstract class Account {
         this.accHolder = accHolder;
         this.balance = balance;
         this.currency = currency;
-        /**/ //Add .txt files every time an account is created
     }
 
     //Getters and Setters
@@ -36,4 +35,6 @@ public abstract class Account {
     public void setCurrency(String currency) {this.currency = currency;}
 
     public abstract String showAvailableBalance();
+
+    public abstract String getAccountType();
 }

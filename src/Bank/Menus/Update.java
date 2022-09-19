@@ -1,7 +1,7 @@
-package Menus;
+package Bank.Menus;
 
-import Cuentas.Account;
-import DbConnect.DbConnect;
+import Bank.Cuentas.Account;
+import Bank.DbConnect.DbConnect;
 
 public class Update {
     public static void updateBalance(Account originAccount, Account destinyAccount, float amount){

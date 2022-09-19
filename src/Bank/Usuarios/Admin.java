@@ -1,4 +1,4 @@
-package Usuarios;
+package Bank.Usuarios;
 
 public class Admin extends User{
     private boolean admin = true;

@@ -1,8 +1,4 @@
-package Usuarios;
-
-import Cuentas.Account;
-
-import java.util.ArrayList;
+package Bank.Usuarios;
 
 public class Client extends User{
 

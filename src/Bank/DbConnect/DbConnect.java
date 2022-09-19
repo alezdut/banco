@@ -1,4 +1,4 @@
-package DbConnect;
+package Bank.DbConnect;
 
 import java.sql.*;
 
