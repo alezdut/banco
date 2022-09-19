@@ -9,10 +9,12 @@ public abstract class User {
     private String lastName;
     private String userName;
     private String password;
-    private ArrayList<Account> accounts = new ArrayList<Account>();
-    public User(String name, String lastName){
+    private ArrayList<Account> accounts;
+    public User(String name, String lastName, String userName, String password){
         this.name = name;
         this.lastName = lastName;
+        this.userName = userName;
+        this.password = password;
     }
     public ArrayList<Account> getAccounts() {
         return accounts;

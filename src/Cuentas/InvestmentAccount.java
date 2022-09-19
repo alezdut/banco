@@ -15,10 +15,10 @@ public class InvestmentAccount extends Account {
     }
 
     @Override
-    public void showAvailableBalance(){
-        System.out.println("Usted tiene $" + this.getBalance() + " saldo disponible en su cuenta de inversiones."
-                            + "\ny ");
-        this.getFixedTerms();
+    public String showAvailableBalance(){
+        //System.out.println("Cuenta de Inversion Numero: " + getAccountID() + " Saldo: " + getCurrency() + getBalance());
+        //this.getFixedTerms();
+        return "Cuenta de Inversion Numero: " + getAccountID() + " Saldo: " + getCurrency() + getBalance();
     }
 
     public void fixedTermMenu(){

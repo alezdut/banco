@@ -35,5 +35,5 @@ public abstract class Account {
 
     public void setCurrency(String currency) {this.currency = currency;}
 
-    public abstract void showAvailableBalance();
+    public abstract String showAvailableBalance();
 }
