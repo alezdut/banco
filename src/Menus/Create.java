@@ -7,6 +7,7 @@ import Usuarios.User;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -134,15 +135,20 @@ public class Create {
             System.out.println("------------------------");
             System.out.println("Cuenta destino seleccionada: ");
             System.out.println("Cuenta Numero: " + destinyAccount.getAccountID());
+            System.out.println("Moneda: " + destinyAccount.getCurrency());
             System.out.println("Titular: " + destinyAccount.getAccHolder().getName() + " " + destinyAccount.getAccHolder().getLastName());
             System.out.println("------------------------");
+            if(!Objects.equals(originAccount.getCurrency(), destinyAccount.getCurrency())){
+                System.out.println("La Divisa cuenta seleccionada no corresponde a la divisa de la cuenta origen");
+                return;
+            }
             System.out.println("ingrese el monto a transferir: ");
             amount = input.nextInt();
             if(amount > originAccount.getBalance()){
                 System.out.println("No cuenta con saldo suficiente en la cuenta origen.");
             }
             else{
-                System.out.println("Confirma la transferencia de " + amount + " a la cuenta numero " + destinyAccount.getAccountID() + " de " + destinyAccount.getAccHolder().getName() + " " + destinyAccount.getAccHolder().getLastName() + "?");
+                System.out.println("Confirma la transferencia de "+ originAccount.getCurrency() + amount + " a la cuenta numero " + destinyAccount.getAccountID() + " de " + destinyAccount.getAccHolder().getName() + " " + destinyAccount.getAccHolder().getLastName() + "?");
                 System.out.println("1. Aceptar");
                 System.out.println("2. Cancelar");
                 option = input.nextInt();

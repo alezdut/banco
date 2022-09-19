@@ -31,12 +31,21 @@ public class Main {
                     case 1:
                         System.out.println("------------------------");
                         ArrayList<Account> accounts = Get.getAccountsByUser(loggedUser);
-                        AtomicReference<Float> saldoTotal = new AtomicReference<>(0.0F);
+                        AtomicReference<Float> saldoTotalPesos = new AtomicReference<>(0.0F);
+                        AtomicReference<Float> saldoTotalDolares = new AtomicReference<>(0.0F);
                         accounts.forEach(e -> {
                             System.out.println(e.showAvailableBalance());
-                            saldoTotal.updateAndGet(v -> (v + e.getBalance()));
+                            if(Objects.equals(e.getCurrency(), "$")){
+                                saldoTotalPesos.updateAndGet(v -> (v + e.getBalance()));
+                            }
+                            if(Objects.equals(e.getCurrency(), "US$")){
+                                saldoTotalDolares.updateAndGet(v -> (v + e.getBalance()));
+                            }
+
                         });
-                        System.out.println("Saldo Acumulado: " + saldoTotal);
+                        System.out.println("");
+                        System.out.println("Saldo Acumulado en Pesos: " + saldoTotalPesos);
+                        System.out.println("Saldo Acumulado en Dolares: " + saldoTotalDolares);
                         System.out.println("------------------------");
                         break;
                     case 2:
