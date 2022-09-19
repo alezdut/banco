@@ -1,6 +1,5 @@
-package Cuentas;
+package Bank.Cuentas;
 
-import Usuarios.User;
 import java.util.Date;
 
 public class FixedTerm {

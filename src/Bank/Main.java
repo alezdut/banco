@@ -1,8 +1,9 @@
+package Bank;
 
-import Cuentas.Account;
-import Menus.Create;
-import Menus.Get;
-import Usuarios.User;
+import Bank.Cuentas.Account;
+import Bank.Menus.Create;
+import Bank.Menus.Get;
+import Bank.Usuarios.User;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -19,12 +20,12 @@ public class Main {
         while (!exit) {
             if(loggedUser != null){
                 try{
-                System.out.println("Hola " + loggedUser.getName() + "!");
-                System.out.println("Seleccione una de las opciones:");
+                System.out.println("\t*** Hola " + loggedUser.getName() + "! Selecciona una de las opciones***\n");
                 System.out.println("1. Revisar saldo");
                 System.out.println("2. Crear Cuenta de inversion o ahorro");
                 System.out.println("3. Hacer Transferencia");
-                System.out.println("4. Cerrar Sesion");
+                System.out.println("4. Revisar historial de movimientos");
+                System.out.println("5. Cerrar Sesion");
                 option = sn.nextInt();
 
                 switch (option) {
@@ -55,6 +56,20 @@ public class Main {
                         Create.createTransaction(loggedUser);
                         break;
                     case 4:
+                        ArrayList<Transaction> transactions = Get.getTransactionsByUser(loggedUser);
+                        User finalLoggedUser = loggedUser;
+                        System.out.println("------------------------");
+                        transactions.forEach(t -> {
+                        if(t.getDestiny().getAccHolder().getUserName().equals(finalLoggedUser.getUserName())){
+                            System.out.println("ID: " + t.getTransactionID() + " Fecha: " + t.getDate() + " Monto: +" + t.getOrigin().getCurrency() + t.getAmount() + " de " + t.getOrigin().getAccHolder().getName() + " " + t.getOrigin().getAccHolder().getLastName());
+                        }
+                        else{
+                            System.out.println("ID: " + t.getTransactionID() + " Fecha: " + t.getDate() + " Monto: -" + t.getOrigin().getCurrency() + t.getAmount() + " a " + t.getDestiny().getAccHolder().getName() + " " + t.getDestiny().getAccHolder().getLastName());
+                        }
+                        });
+                        System.out.println("------------------------");
+                        break;
+                    case 5:
                         loggedUser = null;
                         break;
                     default:
@@ -69,7 +84,7 @@ public class Main {
             }
             else{
                 try {
-                    System.out.println("Seleccione una de las opciones:");
+                    System.out.println("\t***Seleccione una de las opciones***\n");
                     System.out.println("1. Iniciar Sesión");
                     System.out.println("2. Crear Cuenta");
                     System.out.println("3. Salir");

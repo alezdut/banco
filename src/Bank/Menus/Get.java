@@ -1,17 +1,18 @@
-package Menus;
+package Bank.Menus;
 
-import Cuentas.Account;
-import Cuentas.FixedTerm;
-import Cuentas.InvestmentAccount;
-import Cuentas.SavingsAccount;
-import DbConnect.DbConnect;
-import Usuarios.Client;
-import Usuarios.User;
+import Bank.Cuentas.Account;
+import Bank.Cuentas.InvestmentAccount;
+import Bank.Cuentas.SavingsAccount;
+import Bank.DbConnect.DbConnect;
+import Bank.Usuarios.Client;
+import Bank.Usuarios.User;
+import Bank.Transaction;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Get {
     public static User logIn() throws SQLException {
@@ -88,5 +89,36 @@ public class Get {
             System.out.println("Ocurrio un error al consultar la informacion");
         }
         return account;
+    }
+
+    public static ArrayList<Transaction> getTransactionsByUser(User user){
+        DbConnect connect = new DbConnect();
+        connect.connect();
+        Scanner input = new Scanner(System.in);
+        ArrayList<Account> accounts = Get.getAccountsByUser(user);
+        AtomicInteger cont = new AtomicInteger(1);
+        System.out.println("\t***Historial de Movimientos***\n");
+        System.out.println("Seleccione la cuenta que desea consultar: ");
+        accounts.forEach(e -> {
+            System.out.println(cont + ". " + e.showAvailableBalance());
+            cont.getAndIncrement();
+        });
+        int option = input.nextInt();
+        int selected = accounts.get(option -1).getAccountID();
+
+        Account account = Get.getAccountById(selected);
+        ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+
+        try{
+            ResultSet transactionsDb = connect.get("SELECT `transaction`.`transaction_id`, `transaction`.`date`, `transaction`.`amount`, `transaction`.`origin_account_id`, `transaction`.`destiny_account_id` FROM `BANK`.`transaction` WHERE `transaction`.`origin_account_id` = " + account.getAccountID() + " OR `transaction`.`destiny_account_id` = " + account.getAccountID() + ";");
+            while (transactionsDb.next()) {
+                Transaction tc = new Transaction(Integer.parseInt(transactionsDb.getString("transaction_id")), transactionsDb.getString("date"), Float.parseFloat(transactionsDb.getString("amount")), Get.getAccountById(Integer.parseInt(transactionsDb.getString("origin_account_id"))), Get.getAccountById(Integer.parseInt(transactionsDb.getString("destiny_account_id"))));
+                transactions.add(tc);
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        return transactions;
     }
 }

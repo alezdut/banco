@@ -1,4 +1,4 @@
-package DbConnect;
+package Bank.DbConnect;
 
 import java.sql.*;
 
@@ -14,7 +14,7 @@ public class DbConnect {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
             //statement = connection.createStatement();
-            System.out.println("conected to db");
+            //System.out.println("conected to db");
         } catch (SQLException e) {
             System.err.print(e.getMessage());
         } catch (Exception e) {
