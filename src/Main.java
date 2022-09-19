@@ -1,11 +1,15 @@
 
 import Cuentas.Account;
 import Cuentas.InvestmentAccount;
+import DbConnect.DbConnect;
 import Menus.Create;
 import Menus.LogIn;
 import Usuarios.Client;
 import Usuarios.User;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -20,7 +24,6 @@ public class Main {
         boolean logged = false;
         int option;
         User loggedUser;
-
         while (!exit) {
             if(logged){
                 try{
@@ -66,9 +69,8 @@ public class Main {
                             }
                             break;
                         case 2:
-                            loggedUser = new Create().createAccount(unSet);
-                            if(loggedUser != null){
-                                usersSet.add(loggedUser);
+                            boolean valid = new Create().createAccount();
+                            if(valid){
                                 logged = true;
                             }
                             break;
