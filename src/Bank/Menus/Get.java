@@ -106,6 +106,7 @@ public class Get {
         int option = input.nextInt();
         int selected = accounts.get(option -1).getAccountID();
 
+        System.out.println("Cargando...");
         Account account = Get.getAccountById(selected);
         ArrayList<Transaction> transactions = new ArrayList<Transaction>();
 

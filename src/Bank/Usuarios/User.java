@@ -1,8 +1,11 @@
 package Bank.Usuarios;
 
 import Bank.Cuentas.Account;
+import Bank.Menus.Get;
 
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
 public abstract class User {
     private String name;
@@ -53,5 +56,24 @@ public abstract class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void checkBalance() {
+        ArrayList<Account> accounts = Get.getAccountsByUser(this);
+        AtomicReference<Float> saldoTotalPesos = new AtomicReference<>(0.0F);
+        AtomicReference<Float> saldoTotalDolares = new AtomicReference<>(0.0F);
+        accounts.forEach(e -> {
+            System.out.println(e.showAvailableBalance());
+            if(Objects.equals(e.getCurrency(), "$")){
+                saldoTotalPesos.updateAndGet(v -> (v + e.getBalance()));
+            }
+            if(Objects.equals(e.getCurrency(), "US$")){
+                saldoTotalDolares.updateAndGet(v -> (v + e.getBalance()));
+            }
+
+        });
+        System.out.println("");
+        System.out.println("Saldo Acumulado en Pesos: " + saldoTotalPesos);
+        System.out.println("Saldo Acumulado en Dolares: " + saldoTotalDolares);
     }
 }

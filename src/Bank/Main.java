@@ -30,23 +30,9 @@ public class Main {
 
                 switch (option) {
                     case 1:
+                        System.out.println("Cargando...");
                         System.out.println("------------------------");
-                        ArrayList<Account> accounts = Get.getAccountsByUser(loggedUser);
-                        AtomicReference<Float> saldoTotalPesos = new AtomicReference<>(0.0F);
-                        AtomicReference<Float> saldoTotalDolares = new AtomicReference<>(0.0F);
-                        accounts.forEach(e -> {
-                            System.out.println(e.showAvailableBalance());
-                            if(Objects.equals(e.getCurrency(), "$")){
-                                saldoTotalPesos.updateAndGet(v -> (v + e.getBalance()));
-                            }
-                            if(Objects.equals(e.getCurrency(), "US$")){
-                                saldoTotalDolares.updateAndGet(v -> (v + e.getBalance()));
-                            }
-
-                        });
-                        System.out.println("");
-                        System.out.println("Saldo Acumulado en Pesos: " + saldoTotalPesos);
-                        System.out.println("Saldo Acumulado en Dolares: " + saldoTotalDolares);
+                        loggedUser.checkBalance();
                         System.out.println("------------------------");
                         break;
                     case 2:
@@ -56,28 +42,25 @@ public class Main {
                         Create.createTransaction(loggedUser);
                         break;
                     case 4:
+                        System.out.println("Cargando...");
                         ArrayList<Transaction> transactions = Get.getTransactionsByUser(loggedUser);
                         User finalLoggedUser = loggedUser;
                         System.out.println("------------------------");
-                        transactions.forEach(t -> {
-                        if(t.getDestiny().getAccHolder().getUserName().equals(finalLoggedUser.getUserName())){
-                            System.out.println("ID: " + t.getTransactionID() + " Fecha: " + t.getDate() + " Monto: +" + t.getOrigin().getCurrency() + t.getAmount() + " de " + t.getOrigin().getAccHolder().getName() + " " + t.getOrigin().getAccHolder().getLastName());
-                        }
-                        else{
-                            System.out.println("ID: " + t.getTransactionID() + " Fecha: " + t.getDate() + " Monto: -" + t.getOrigin().getCurrency() + t.getAmount() + " a " + t.getDestiny().getAccHolder().getName() + " " + t.getDestiny().getAccHolder().getLastName());
-                        }
-                        });
+                        transactions.forEach(t -> t.printTransaction(finalLoggedUser));
                         System.out.println("------------------------");
                         break;
                     case 5:
                         loggedUser = null;
                         break;
                     default:
-                        System.out.println("Solo números entre 1 y 3");
+                        System.out.println("Solo números entre 1 y 5");
                 }
+                   System.out.println("Presione cualquier tecla para continuar: ");
+                   Scanner anyKey = new Scanner(System.in);
+                   anyKey.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println("Debes insertar un número");
-                sn.next();
+                sn.nextLine();
             } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -112,4 +95,6 @@ public class Main {
             }
         }
     }
+
+
 }

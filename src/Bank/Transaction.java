@@ -1,6 +1,7 @@
 package Bank;
 
 import Bank.Cuentas.Account;
+import Bank.Usuarios.User;
 
 public class Transaction {
     private int transactionID;
@@ -57,20 +58,11 @@ public class Transaction {
         this.destiny = destiny;
     }
 
-    @Override
-    public String toString(){
-        String s = "Transaction ID: " + this.getTransactionID() +
-                    "\nDate: " + this.getDate() +
-                    "\nAmount: " + this.getAmount() +
-                    "\nCurrency: " + this.getOrigin().getCurrency() +
-                    "\nFrom account: " +
-                    "\n\tAccount owner: " + this.getOrigin().getAccHolder().getName() +
-                    "\n\tAccount ID: " + this.getOrigin().getAccountID() +
-                    "\n\tAccount type: " + this.getOrigin().getAccountType() +
-                    "\nTo account: " +
-                    "\n\tAccount owner: " + this.getDestiny().getAccHolder().getName() +
-                    "\n\tAccount ID: " + this.getDestiny().getAccountID() +
-                    "\n\tAccount type: " + this.getDestiny().getAccountType();
-        return s;
+    public void printTransaction(User user){
+        if(this.getDestiny().getAccHolder().getUserName().equals(user.getUserName()))
+            System.out.println("ID: " + this.getTransactionID() + " Fecha: " + this.getDate() + " Monto: +" + this.getOrigin().getCurrency() + this.getAmount() + " de " + this.getOrigin().getAccHolder().getName() + " " + this.getOrigin().getAccHolder().getLastName());
+        else
+            System.out.println("ID: " + this.getTransactionID() + " Fecha: " + this.getDate() + " Monto: -" + this.getOrigin().getCurrency() + this.getAmount() + " a " + this.getDestiny().getAccHolder().getName() + " " + this.getDestiny().getAccHolder().getLastName());
+
     }
 }

@@ -11,4 +11,13 @@ public class Admin extends User{
         return admin;
     }
 
+    public int getTotalAccounts(){
+        //Implement this method
+        return 0;
+    }
+
+    public int getDailyTransactions(){
+        //Implement this method
+        return 0;
+    }
 }
