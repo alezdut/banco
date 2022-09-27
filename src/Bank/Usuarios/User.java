@@ -76,4 +76,7 @@ public abstract class User {
         System.out.println("Saldo Acumulado en Pesos: " + saldoTotalPesos);
         System.out.println("Saldo Acumulado en Dolares: " + saldoTotalDolares);
     }
+    public abstract boolean isAdmin();
+
+
 }

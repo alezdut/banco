@@ -63,6 +63,10 @@ public class Transaction {
             System.out.println("ID: " + this.getTransactionID() + " Fecha: " + this.getDate() + " Monto: +" + this.getOrigin().getCurrency() + this.getAmount() + " de " + this.getOrigin().getAccHolder().getName() + " " + this.getOrigin().getAccHolder().getLastName());
         else
             System.out.println("ID: " + this.getTransactionID() + " Fecha: " + this.getDate() + " Monto: -" + this.getOrigin().getCurrency() + this.getAmount() + " a " + this.getDestiny().getAccHolder().getName() + " " + this.getDestiny().getAccHolder().getLastName());
+    }
 
+    @Override
+    public String toString(){
+        return  "ID: " + this.getTransactionID() + " Fecha: " + this.getDate() + " Monto: +" + this.getOrigin().getCurrency() + this.getAmount() + " Origen: " + this.getOrigin().getAccHolder().getName() + " " + this.getOrigin().getAccHolder().getLastName() + " Destino: " + this.getDestiny().getAccHolder().getName() + " " + this.getDestiny().getAccHolder().getLastName();
     }
 }

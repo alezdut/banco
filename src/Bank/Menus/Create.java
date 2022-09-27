@@ -2,8 +2,6 @@ package Bank.Menus;
 
 import Bank.Cuentas.Account;
 import Bank.DbConnect.DbConnect;
-import Bank.Menus.Get;
-import Bank.Menus.Update;
 import Bank.Usuarios.Client;
 import Bank.Usuarios.User;
 
@@ -104,10 +102,10 @@ public class Create {
         System.out.println("Guardando en base de datos...");
         int valid = connect.execute("INSERT INTO `BANK`.`account` (`account_id`, `currency`, `balance`, `type`, `user_id`) VALUES (0, '" + currency + "', 0, '" + type +"', " + id + ");");
         if(valid == 1){
-            System.out.println("cuenta creada con exito.");
+            System.out.println("Cuenta creada con exito.");
         }
         else{
-            System.out.println("ocurrio un error al guardar la informacion");
+            System.out.println("Ocurrio un error al guardar la informacion");
         }
     }
 
@@ -144,7 +142,7 @@ public class Create {
                 System.out.println("La Divisa cuenta seleccionada no corresponde a la divisa de la cuenta origen");
                 return;
             }
-            System.out.println("ingrese el monto a transferir: ");
+            System.out.println("Ingrese el monto a transferir: ");
             amount = input.nextInt();
             if(amount > originAccount.getBalance()){
                 System.out.println("No cuenta con saldo suficiente en la cuenta origen.");
@@ -162,7 +160,7 @@ public class Create {
                             break;
                         }
                         else{
-                            System.out.println("ocurrio un error al guardar la informacion");
+                            System.out.println("Ocurrio un error al guardar la informacion");
                             break;
                         }
                     case 2:

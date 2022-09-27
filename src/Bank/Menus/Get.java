@@ -4,6 +4,7 @@ import Bank.Cuentas.Account;
 import Bank.Cuentas.InvestmentAccount;
 import Bank.Cuentas.SavingsAccount;
 import Bank.DbConnect.DbConnect;
+import Bank.Usuarios.Admin;
 import Bank.Usuarios.Client;
 import Bank.Usuarios.User;
 import Bank.Transaction;
@@ -27,9 +28,12 @@ public class Get {
         System.out.println("Ingrese su contraseña: ");
         String password = input.nextLine();
 
-        ResultSet user = connect.get("SELECT `user`.`user_id`,`user`.`name`,`user`.`last_name`, `user`.`user_name`, `user`.`password` FROM `BANK`.`user` WHERE user.user_name = '" + userName + "';");
+        ResultSet user = connect.get("SELECT `user`.`user_id`,`user`.`name`,`user`.`last_name`, `user`.`user_name`, `user`.`password`, `user`.`isAdmin` FROM `BANK`.`user` WHERE user.user_name = '" + userName + "';");
         while(user.next()){
             if(user.getString("password").equals(password)){
+                if(user.getString("isAdmin") != null){
+                    return new Admin(user.getString("name"), user.getString("last_name"), user.getString("user_name"), user.getString("password"));
+                }
                 return new Client(user.getString("name"), user.getString("last_name"), user.getString("user_name"), user.getString("password"));
             };
         }
@@ -121,5 +125,51 @@ public class Get {
         }
 
         return transactions;
+    }
+
+    public static ArrayList<Client> getAllUsers(){
+        ArrayList<Client> users = new ArrayList<Client>();
+        try {
+            DbConnect connect = new DbConnect();
+            connect.connect();
+            ResultSet usersDb = connect.get("SELECT `user`.`name`, `user`.`last_name`, `user`.`user_name`, `user`.`password` FROM `BANK`.`user` WHERE `user`.`isAdmin` IS NULL;");
+            while (usersDb.next()) {
+                Client client = new Client(usersDb.getString("name"), usersDb.getString("last_name"), usersDb.getString("user_name"), usersDb.getString("password"));
+                users.add(client);
+            }
+        }catch (SQLException e) {
+            System.out.println("Ocurrio un error al consultar la informacion");
+        }
+        return users;
+    }
+
+    public static float getGeneralBalancePesos(){
+        float total = 0;
+        try {
+            DbConnect connect = new DbConnect();
+            connect.connect();
+            ResultSet balancesDb = connect.get("SELECT `account`.`balance` FROM `BANK`.`account` WHERE `account`.`currency` = '$';");
+            while (balancesDb.next()) {
+                total += balancesDb.getFloat("balance");
+            }
+        }catch (SQLException e) {
+            System.out.println("Ocurrio un error al consultar la informacion");
+        }
+        return total;
+    }
+
+    public static float getGeneralBalanceDollars(){
+        float total = 0;
+        try {
+            DbConnect connect = new DbConnect();
+            connect.connect();
+            ResultSet balancesDb = connect.get("SELECT `account`.`balance` FROM `BANK`.`account` WHERE `account`.`currency` = 'US$';");
+            while (balancesDb.next()) {
+                total += balancesDb.getFloat("balance");
+            }
+        }catch (SQLException e) {
+            System.out.println("Ocurrio un error al consultar la informacion");
+        }
+        return total;
     }
 }
