@@ -1,20 +1,14 @@
 package Bank;
 
-import Bank.Cuentas.Account;
 import Bank.Menus.Create;
 import Bank.Menus.Get;
-import Bank.Usuarios.Admin;
 import Bank.Usuarios.Client;
 import Bank.Usuarios.User;
 
 import java.sql.SQLException;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
-
 public class Main {
     public static void main(String[] args){
-        Set<String> unSet = new HashSet<String>();
-        Set<User> usersSet = new HashSet<User>();
         Scanner sn = new Scanner(System.in);
         boolean exit = false;
         int option;
@@ -28,25 +22,22 @@ public class Main {
                     System.out.println("3. Cerrar sesion");
                     option = sn.nextInt();
                     sn.nextLine();
-                    switch (option){
-                        case 1:
+                    switch (option) {
+                        case 1 -> {
                             System.out.println("------------------------");
                             ArrayList<Client> users = Get.getAllUsers();
                             System.out.println("Total de usuarios activos: " + users.size());
                             users.forEach(System.out::println);
                             System.out.println("------------------------");
-                            break;
-                        case 2:
+                        }
+                        case 2 -> {
                             System.out.println("------------------------");
                             System.out.println("El balance general en Pesos es: $" + Get.getGeneralBalancePesos());
                             System.out.println("El balance general en Dolares es: US$" + Get.getGeneralBalanceDollars());
                             System.out.println("------------------------");
-                            break;
-                        case 3:
-                            loggedUser = null;
-                            break;
-                        default:
-                            System.out.println("Solo números entre 1 y 3");
+                        }
+                        case 3 -> loggedUser = null;
+                        default -> System.out.println("Solo números entre 1 y 3");
                     }
                     System.out.println("Presione cualquier tecla para continuar: ");
                     Scanner anyK = new Scanner(System.in);
@@ -64,31 +55,24 @@ public class Main {
                         sn.nextLine();
 
                         switch (option) {
-                            case 1:
+                            case 1 -> {
                                 System.out.println("Cargando...");
                                 System.out.println("------------------------");
                                 loggedUser.checkBalance();
                                 System.out.println("------------------------");
-                                break;
-                            case 2:
-                                Create.createAccount(loggedUser);
-                                break;
-                            case 3:
-                                Create.createTransaction(loggedUser);
-                                break;
-                            case 4:
+                            }
+                            case 2 -> Create.createAccount(loggedUser);
+                            case 3 -> Create.createTransaction(loggedUser);
+                            case 4 -> {
                                 System.out.println("Cargando...");
                                 ArrayList<Transaction> transactions = Get.getTransactionsByUser(loggedUser);
                                 User finalLoggedUser = loggedUser;
                                 System.out.println("------------------------");
                                 transactions.forEach(t -> t.printTransaction(finalLoggedUser));
                                 System.out.println("------------------------");
-                                break;
-                            case 5:
-                                loggedUser = null;
-                                break;
-                            default:
-                                System.out.println("Solo números entre 1 y 5");
+                            }
+                            case 5 -> loggedUser = null;
+                            default -> System.out.println("Solo números entre 1 y 5");
                         }
                         System.out.println("Presione cualquier tecla para continuar: ");
                         Scanner anyKey = new Scanner(System.in);
@@ -110,17 +94,10 @@ public class Main {
                     option = sn.nextInt();
 
                     switch (option) {
-                        case 1:
-                            loggedUser =  Get.logIn();
-                            break;
-                        case 2:
-                            loggedUser = new Create().createClient();
-                            break;
-                        case 3:
-                            exit = true;
-                            break;
-                        default:
-                            System.out.println("Solo números entre 1 y 3");
+                        case 1 -> loggedUser = Get.logIn();
+                        case 2 -> loggedUser = new Create().createClient();
+                        case 3 -> exit = true;
+                        default -> System.out.println("Solo números entre 1 y 3");
                     }
                 } catch (InputMismatchException e) {
                     System.out.println("Debes insertar un número");

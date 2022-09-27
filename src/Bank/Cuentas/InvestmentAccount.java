@@ -1,9 +1,6 @@
 package Bank.Cuentas;
 
-import java.util.ArrayList;
-import java.util.Scanner;
 import Bank.Usuarios.User;
-import java.util.InputMismatchException;
 
 public class InvestmentAccount extends Bank.Cuentas.Account {
     //Constructor
