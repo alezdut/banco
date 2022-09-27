@@ -10,7 +10,6 @@ public class SavingsAccount extends Bank.Cuentas.Account {
 
     @Override
     public String showAvailableBalance(){
-        //System.out.println("Caja de ahorro Numero: " + getAccountID() + " Saldo: " + getCurrency() + getBalance());
         return "Caja de ahorro Numero: " + getAccountID() + " Saldo: " + getCurrency() + getBalance();
     }
 
