@@ -4,6 +4,7 @@ import Bank.Cuentas.Account;
 import Bank.Menus.Create;
 import Bank.Menus.Get;
 import Bank.Usuarios.Admin;
+import Bank.Usuarios.Client;
 import Bank.Usuarios.User;
 
 import java.sql.SQLException;
@@ -22,25 +23,34 @@ public class Main {
             if(loggedUser != null) {
                 if (loggedUser.isAdmin()) {
                     System.out.println("\t***ADMIN LOGIN*** \nSelecciona una de las opciones\n");
-                    System.out.println("1. Ver transacciones del dia");
-                    System.out.println("2. Ver total de cuentas creadas");
+                    System.out.println("1. Ver Usuarios registrados");
+                    System.out.println("2. Ver balance general");
                     System.out.println("3. Cerrar sesion");
                     option = sn.nextInt();
                     sn.nextLine();
                     switch (option){
                         case 1:
-                            ArrayList<Transaction> dailyTransactions = new ArrayList<>();
-                            dailyTransactions = ((Admin)loggedUser).getDailyTransactions();
-                            dailyTransactions.forEach(tc -> System.out.println(tc));
+                            System.out.println("------------------------");
+                            ArrayList<Client> users = Get.getAllUsers();
+                            System.out.println("Total de usuarios activos: " + users.size());
+                            users.forEach(System.out::println);
+                            System.out.println("------------------------");
                             break;
                         case 2:
-                            System.out.println("El total de cuentas creadas es: " + ((Admin)loggedUser).getTotalAccounts());
+                            System.out.println("------------------------");
+                            System.out.println("El balance general en Pesos es: $" + Get.getGeneralBalancePesos());
+                            System.out.println("El balance general en Dolares es: US$" + Get.getGeneralBalanceDollars());
+                            System.out.println("------------------------");
+                            break;
                         case 3:
                             loggedUser = null;
                             break;
                         default:
                             System.out.println("Solo números entre 1 y 3");
                     }
+                    System.out.println("Presione cualquier tecla para continuar: ");
+                    Scanner anyK = new Scanner(System.in);
+                    anyK.nextLine();
 
                 } else {
                     try {
