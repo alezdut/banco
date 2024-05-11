@@ -42,7 +42,7 @@ For further understanding on how the program works, along with a step by step gu
 ## Installation
 1. Download this project as zip and extract it.
 2. Import it in your preferred IDE.
-3. Migrate the [database file](Bank.sql) into your **PostgreSQL** manager. We've used [pgAdmin 4](https://www.pgadmin.org/download/).
+3. Migrate the database file either in [plain format (.sql)](bankDB.sql) or [.tar](bankDB.tar) into your **PostgreSQL** manager. We've used [pgAdmin 4](https://www.pgadmin.org/download/).
 4. Verify you have already installed `org.postgresql.Driver` and it's been added to project external libraries. In case you don't have it, download it from the [official page](https://jdbc.postgresql.org/download/).
 5. Connect your database by modifying the following lines in
    `src/Bank/DbConnect/DbConnect.java`
