@@ -2,6 +2,7 @@ package Bank;
 
 import Bank.Menus.Create;
 import Bank.Menus.Get;
+import Bank.Menus.Update;
 import Bank.Usuarios.Client;
 import Bank.Usuarios.User;
 
@@ -18,7 +19,7 @@ public class Main {
                 if (loggedUser.isAdmin()) {
                     System.out.println("\t***ADMIN LOGIN*** \nSelecciona una de las opciones\n");
                     System.out.println("1. Ver Usuarios registrados");
-                    System.out.println("2. Ver balance general");
+                    System.out.println("2. Ver balance acumulado del banco");
                     System.out.println("3. Cerrar sesion");
                     option = sn.nextInt();
                     sn.nextLine();
@@ -50,7 +51,8 @@ public class Main {
                         System.out.println("2. Crear Cuenta de inversion o ahorro");
                         System.out.println("3. Hacer Transferencia");
                         System.out.println("4. Revisar historial de movimientos");
-                        System.out.println("5. Cerrar Sesion");
+                        System.out.println("5. Ingresar dinero");
+                        System.out.println("6. Cerrar Sesion");
                         option = sn.nextInt();
                         sn.nextLine();
 
@@ -67,11 +69,16 @@ public class Main {
                                 System.out.println("Cargando...");
                                 ArrayList<Transaction> transactions = Get.getTransactionsByUser(loggedUser);
                                 User finalLoggedUser = loggedUser;
-                                System.out.println("------------------------");
-                                transactions.forEach(t -> t.printTransaction(finalLoggedUser));
-                                System.out.println("------------------------");
+                                if(transactions != null){
+                                    System.out.println("------------------------");
+                                    transactions.forEach(t -> t.printTransaction(finalLoggedUser));
+                                    System.out.println("------------------------");
+                                }
                             }
-                            case 5 -> loggedUser = null;
+                            case 5 -> {
+                                Update.updateBalance(loggedUser);
+                            }
+                            case 6 -> loggedUser = null;
                             default -> System.out.println("Solo números entre 1 y 5");
                         }
                         System.out.println("Presione cualquier tecla para continuar: ");
