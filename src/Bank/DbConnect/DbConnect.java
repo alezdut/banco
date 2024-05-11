@@ -5,13 +5,13 @@ import java.sql.*;
 public class DbConnect {
     private Connection connection = null;
 
-    private static final String DB_USER = "root";
-    private static final String DB_PASS = "";
-    private static final String DB_URL = "";
+    private static final String DB_USER = "postgres";
+    private static final String DB_PASS = "hola1213";
+    private static final String DB_URL = "jdbc:postgresql://localhost:5432/bank";
 
     public void connect() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
         } catch (SQLException e) {
             System.err.print(e.getMessage());
@@ -34,7 +34,7 @@ public class DbConnect {
     public ResultSet get(String sentence){
         try {
             PreparedStatement pstm = connection.prepareStatement(sentence);
-            return pstm.executeQuery(sentence);
+            return pstm.executeQuery();
         } catch (SQLException e){
             System.out.println(e);
             return null;
